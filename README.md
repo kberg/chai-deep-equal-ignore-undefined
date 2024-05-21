@@ -9,9 +9,12 @@ Ignore keys with undefined value to compare from a deep equal operation with cha
 
 ## Why?
 
-Sometimes you will have properties which have undefined value. This plugin helps to ignore those properties from comparison.
+Sometimes you will have properties within asserting objects which have undefined value.
+This plugin ignore those properties from comparison.
 
 Works with both objects and array of objects with or without circular references.
+
+Assert and expect API are supported
 
 ## Installation
 
@@ -58,15 +61,19 @@ chai.use(chaiIgnoreUndefinedProperties);
 
 All these examples are for JavaScript.
 
-### a) excluding
-
 1. Ignore a top level property from an object
 
 ```js
-expect({ aa: undefined, bb: "b" }).to.equal({
+// Expect API
+expect({ aa: undefined, bb: "b" }).to.deepEqualIgnoreUndefined({
   bb: "b",
   cc: undefined,
 });
+// Assert API
+assert.deepEqualIgnoreUndefined(
+  { a: undefined, b: "b" },
+  { b: "b", c: undefined }
+);
 ```
 
 2. Ignore properties within array with undefined values
@@ -74,17 +81,26 @@ expect({ aa: undefined, bb: "b" }).to.equal({
 ```js
 const expectedArray = [{ aa: undefined, bb: "b" }];
 const actualArray = [{ cc: undefined, bb: "b" }];
-expect(actualArray).to.deep.equal(expectedArray);
+// Expect API
+expect(actualArray).to.deepEqualIgnoreUndefined(expectedArray);
+// Assert API
+assert.deepEqualIgnoreUndefined(expectedArray, actualArray);
 ```
 
 3. Ignore a nested properties with undefined value (only for deep equal comparison)
 
 ```js
+// Expect API
 expect({
   topLevelProp: { aa: undefined, bb: "b" },
-}).to.deep.equal({
+}).to.deepEqualIgnoreUndefined({
   topLevelProp: { bb: "b", cc: undefined },
 });
+// Assert API
+assert.deepEqualIgnoreUndefined(
+  { a: { b: undefined, c: "c" } },
+  { a: { c: "c", d: undefined } }
+);
 ```
 
 4. Works with circular dependencies
@@ -96,7 +112,10 @@ actualObject.c = actualObject;
 const expectedObject = { bb: "b", cc: undefined };
 expectedObject.c = expectedObject;
 
-expect(actualObject).to.deep.equal(expectedObject);
+// Expect API
+expect(actualObject).to.deepEqualIgnoreUndefined(expectedObject);
+// Assert API
+assert.deepEqualIgnoreUndefined(actualObject, expectedObject);
 ```
 
 ## Contributing

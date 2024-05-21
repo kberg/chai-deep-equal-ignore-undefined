@@ -1,0 +1,51 @@
+{
+  "name": "chai-deep-equal-ignore-undefined",
+  "version": "1.0.0",
+  "description": "Ignore keys which have undefined values to compare from a deep equal operation with chai expect",
+  "main": "chai-deep-equal-ignore-undefined.js",
+  "types": "index.d.ts",
+  "author": "Daniel Kurtjak <daniel.kurtjak@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/DanielKurtjak/chai-deep-equal-ignore-undefined",
+  "files": [
+    "chai-deep-equal-ignore-undefined.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "test": "mocha --reporter spec --recursive --colors *.test.js",
+    "code:fix": "prettier --write --list-different '**/*.{ts,js,json}'",
+    "code:check": "prettier  --list-different '**/*.{ts,js,json}'",
+    "type:check": "tsd"
+  },
+  "keywords": [
+    "chai",
+    "assert",
+    "expect",
+    "ignore",
+    "undefined",
+    "properties",
+    "chai-plugin",
+    "chai-deep-equal-ignore-undefined"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DanielKurtjak/chai-deep-equal-ignore-undefined"
+  },
+  "bugs": {
+    "url": "https://github.com/DanielKurtjak/chai-deep-equal-ignore-undefined/issues"
+  },
+  "mocha": {
+    "timeout": 20000
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "prettier": "^3.2.5",
+    "tsd": "^0.25.0"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "chai": ">= 4.0.0 < 5"
+  }
+}

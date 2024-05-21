@@ -44,14 +44,14 @@ describe("chai-equal-ignore-undefined-props", () => {
       it("should work when actual param is a promise", async () => {
         await assert.deepEqualIgnoreUndefined(
           Promise.resolve({ a: undefined, b: "b" }),
-          { b: "b", c: undefined }
+          { b: "b", c: undefined },
         );
       });
 
       it("should work when expected param is a promise", async () => {
         await assert.deepEqualIgnoreUndefined(
           { a: undefined, b: "b" },
-          Promise.resolve({ b: "b", c: undefined })
+          Promise.resolve({ b: "b", c: undefined }),
         );
       });
     });
@@ -104,12 +104,12 @@ describe("chai-equal-ignore-undefined-props", () => {
     it("should ignore key(s) with undefined value from comparison for both expected value and actual value", () => {
       assert.deepEqualIgnoreUndefined(
         { a: undefined, b: "b" },
-        { b: "b", c: undefined }
+        { b: "b", c: undefined },
       );
 
       assert.deepEqualIgnoreUndefined(
         { a: undefined, aa: undefined, b: "b" },
-        { b: "b", c: undefined, cc: undefined }
+        { b: "b", c: undefined, cc: undefined },
       );
     });
 
@@ -130,14 +130,14 @@ describe("chai-equal-ignore-undefined-props", () => {
     it("should work with negated", () => {
       assert.notDeepEqualIgnoreUndefined(
         { a: undefined, b: "b2" },
-        { b: "b", c: undefined }
+        { b: "b", c: undefined },
       );
     });
 
     it("should ignore key(s) with undefined value from comparison for both expected value and actual value in arrays with mixed objects", () => {
       assert.deepEqualIgnoreUndefined(
         [{ a: undefined, b: "b" }, ["c"], { d: "d" }],
-        [{ b: "b" }, ["c"], { d: "d", e: undefined }]
+        [{ b: "b" }, ["c"], { d: "d", e: undefined }],
       );
     });
 
@@ -145,7 +145,7 @@ describe("chai-equal-ignore-undefined-props", () => {
       assert.throws(() => {
         assert.notDeepEqualIgnoreUndefined(
           { a: undefined, b: "b" },
-          { b: "b", c: undefined }
+          { b: "b", c: undefined },
         );
       }, "expected { b: 'b' } to not deeply equal { b: 'b' }");
     });
@@ -155,7 +155,7 @@ describe("chai-equal-ignore-undefined-props", () => {
 
       assert.deepEqualIgnoreUndefined(
         { a: undefined, c: undefined, b: "b" },
-        { b: "b" }
+        { b: "b" },
       );
     });
 
@@ -164,19 +164,19 @@ describe("chai-equal-ignore-undefined-props", () => {
 
       assert.deepEqualIgnoreUndefined(
         { b: "b" },
-        { b: "b", a: undefined, c: undefined }
+        { b: "b", a: undefined, c: undefined },
       );
     });
 
     it("should ignore key(s) with undefined value from comparison for nested objects", () => {
       assert.deepEqualIgnoreUndefined(
         { a: { b: undefined, c: "c" } },
-        { a: { c: "c", d: undefined } }
+        { a: { c: "c", d: undefined } },
       );
 
       assert.deepEqualIgnoreUndefined(
         { a: { b: undefined, bb: undefined, c: "c" } },
-        { a: { c: "c", d: undefined, dd: undefined } }
+        { a: { c: "c", d: undefined, dd: undefined } },
       );
     });
 
@@ -184,7 +184,7 @@ describe("chai-equal-ignore-undefined-props", () => {
       assert.throws(() => {
         assert.deepEqualIgnoreUndefined(
           { a: undefined, b: "b" },
-          { b: "wrong value", c: undefined }
+          { b: "wrong value", c: undefined },
         );
       }, "expected { b: 'b' } to deeply equal { b: 'wrong value' }");
     });
@@ -199,7 +199,7 @@ describe("chai-equal-ignore-undefined-props", () => {
         [
           [undefined, "a"],
           ["b", undefined],
-        ]
+        ],
       );
     });
   });
@@ -208,7 +208,7 @@ describe("chai-equal-ignore-undefined-props", () => {
     describe("with promises", () => {
       it("should work when actual param is a promise", async () => {
         await expect(
-          Promise.resolve({ a: undefined, b: "b" })
+          Promise.resolve({ a: undefined, b: "b" }),
         ).to.deepEqualIgnoreUndefined({
           b: "b",
           c: undefined,
@@ -217,7 +217,7 @@ describe("chai-equal-ignore-undefined-props", () => {
 
       it("should work when expected param is a promise", async () => {
         await expect({ a: undefined, b: "b" }).to.deepEqualIgnoreUndefined(
-          Promise.resolve({ b: "b", c: undefined })
+          Promise.resolve({ b: "b", c: undefined }),
         );
       });
     });
@@ -248,31 +248,31 @@ describe("chai-equal-ignore-undefined-props", () => {
       expect(() => {
         expect(undefined).to.not.deepEqualIgnoreUndefined(undefined);
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but undefined given"
+        "object tested must be an array, an object, or a promise, but undefined given",
       );
 
       expect(() => {
         expect(null).to.not.deepEqualIgnoreUndefined(null);
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but null given"
+        "object tested must be an array, an object, or a promise, but null given",
       );
 
       expect(() => {
         expect(true).to.not.deepEqualIgnoreUndefined(true);
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but boolean given"
+        "object tested must be an array, an object, or a promise, but boolean given",
       );
 
       expect(() => {
         expect(0).to.not.deepEqualIgnoreUndefined(0);
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but number given"
+        "object tested must be an array, an object, or a promise, but number given",
       );
 
       expect(() => {
         expect("").to.not.deepEqualIgnoreUndefined("");
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but string given"
+        "object tested must be an array, an object, or a promise, but string given",
       );
     });
 
@@ -289,7 +289,7 @@ describe("chai-equal-ignore-undefined-props", () => {
       expect(() => {
         expect(mapA).to.deepEqualIgnoreUndefined(mapB);
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but map given"
+        "object tested must be an array, an object, or a promise, but map given",
       );
     });
 
@@ -299,7 +299,7 @@ describe("chai-equal-ignore-undefined-props", () => {
       expect(() => {
         expect(setA).to.deepEqualIgnoreUndefined(setB);
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but set given"
+        "object tested must be an array, an object, or a promise, but set given",
       );
     });
 
@@ -396,31 +396,31 @@ describe("chai-equal-ignore-undefined-props", () => {
       expect(() => {
         expect(undefined).to.deepEqualIgnoreUndefined({ a: undefined });
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but undefined given"
+        "object tested must be an array, an object, or a promise, but undefined given",
       );
 
       expect(() => {
         expect(null).to.deepEqualIgnoreUndefined({ a: undefined });
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but null given"
+        "object tested must be an array, an object, or a promise, but null given",
       );
 
       expect(() => {
         expect("string").to.deepEqualIgnoreUndefined({ a: undefined });
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but string given"
+        "object tested must be an array, an object, or a promise, but string given",
       );
 
       expect(() => {
         expect(123).to.deepEqualIgnoreUndefined({ a: undefined });
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but number given"
+        "object tested must be an array, an object, or a promise, but number given",
       );
 
       expect(() => {
         expect(true).to.deepEqualIgnoreUndefined({ a: undefined });
       }).to.throw(
-        "object tested must be an array, an object, or a promise, but boolean given"
+        "object tested must be an array, an object, or a promise, but boolean given",
       );
     });
 

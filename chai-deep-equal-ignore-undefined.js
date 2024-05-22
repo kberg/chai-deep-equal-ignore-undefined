@@ -49,6 +49,7 @@ function chaiDeepEqualIgnoreUndefined(chai, utils) {
   });
 }
 
+module.exports = chaiDeepEqualIgnoreUndefined;
 module.exports.deepClone = deepClone;
 module.exports.deepCloneIgnoreUndefined = deepCloneIgnoreUndefined;
 module.exports.default = chaiDeepEqualIgnoreUndefined;

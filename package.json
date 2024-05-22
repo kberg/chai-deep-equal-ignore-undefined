@@ -1,6 +1,6 @@
 {
   "name": "chai-deep-equal-ignore-undefined",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Ignore keys which have undefined values to compare from a deep equal operation with chai expect",
   "main": "chai-deep-equal-ignore-undefined.js",
   "types": "index.d.ts",
@@ -9,6 +9,7 @@
   "homepage": "https://github.com/DanielKurtjak/chai-deep-equal-ignore-undefined",
   "files": [
     "chai-deep-equal-ignore-undefined.js",
+    "deep-clone.js",
     "index.d.ts"
   ],
   "scripts": {

@@ -2,11 +2,15 @@ import * as chai from "chai";
 import { expectType } from "tsd";
 
 import ".";
-import * as chaiEqualIgnoreUndefinedProperties from "./chai-deep-equal-ignore-undefined";
+import chaiEqualIgnoreUndefinedProperties, {
+  deepClone,
+  deepCloneIgnoreUndefined,
+} from "./chai-deep-equal-ignore-undefined";
 
 // @ts-ignore
 chai.use(chaiEqualIgnoreUndefinedProperties);
 
+// *** Usage ***
 // BDD API (expect)
 expectType<Chai.Assertion>(
   chai
@@ -26,3 +30,8 @@ chai.assert.notDeepEqualIgnoreUndefined(
   { b: "b", c: undefined },
   "message",
 );
+
+// *** Deep clone function ***
+
+expectType<any>(deepClone({ a: undefined, b: "b" }));
+expectType<any>(deepCloneIgnoreUndefined({ a: undefined, b: "b" }));

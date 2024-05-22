@@ -1,9 +1,11 @@
 /// <reference types="@types/chai" />
 declare module "chai-deep-equal-ignore-undefined" {
-  export default function chaiEqualIgnoreUndefinedProps(
+  export default function chaiDeepEqualIgnoreUndefined(
     chai: Chai.ChaiStatic,
     utils: Chai.ChaiUtils,
   ): void;
+  export function deepClone<T>(obj: T): T;
+  export function deepCloneIgnoreUndefined<T>(obj: T): T;
 }
 
 declare namespace Chai {

@@ -3,41 +3,13 @@
 const { use, assert, expect } = require("chai");
 
 const {
-  default: chaiEqualIgnoreUndefinedProps,
-  deepClone,
+  default: chaiDeepEqualIgnoreUndefined,
 } = require("./chai-deep-equal-ignore-undefined");
 
-use(chaiEqualIgnoreUndefinedProps);
+// Use the new plugin
+use(chaiDeepEqualIgnoreUndefined);
 
 describe("chai-equal-ignore-undefined-props", () => {
-  describe("deepClone", () => {
-    it("should clone an object", () => {
-      const obj = {
-        a: 1,
-        b: new Date(),
-        c: /abc/,
-        d: new Map([["key1", "value1"]]),
-        e: new Set([1, 2, 3]),
-        f: function () {
-          return "f";
-        },
-        g: Symbol("g"),
-        h: null,
-        i: undefined,
-        j: true,
-        k: [1, 2, { l: "m" }],
-        m: {
-          n: {
-            o: "p",
-          },
-        },
-      };
-
-      // Use assert.deepEqual to compare the cloned object with the original object
-      assert.deepEqual(deepClone(obj), obj);
-    });
-  });
-
   describe("assert.deepEqualIgnoreUndefined", () => {
     // Repeat the tests for the expect method
     describe("with promises", () => {

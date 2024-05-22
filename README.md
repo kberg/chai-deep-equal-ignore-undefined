@@ -5,16 +5,21 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![CI Status](https://github.com/DanielKurtjak/chai-deep-equal-ignore-undefined/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/DanielKurtjak/chai-deep-equal-ignore-undefined/actions/workflows/test.yml)
 
-Ignore keys with undefined value to compare from a deep equal operation with chai [expect](http://chaijs.com/api/bdd/).
+This plugin allows you to ignore properties with undefined values when performing deep equal comparisons, using `deepEqualIgnoreUndefined` method and chai's expect or assert API.
+
+It is useful when you have properties within asserting objects that have undefined values and you want to exclude them from the comparison. This plugin works with both objects and arrays of objects, including those with circular references. By using this plugin, you can ensure that only the defined properties are considered during the comparison.
 
 ## Why?
 
-Sometimes you will have properties within asserting objects which have undefined value.
-This plugin ignore those properties from comparison.
+Sometimes, when performing deep equal comparisons, you may encounter properties within asserting objects that have undefined values. This plugin allows you to ignore those properties during the comparison.
 
-Works with both objects and array of objects with or without circular references.
+It works with both objects and arrays of objects, including those with circular references. By using this plugin, you can ensure that only the defined properties are considered during the comparison.
 
-Assert and expect API are supported
+Both the assert and expect API are supported, making it easy to integrate into your testing framework.
+
+If you have any questions or encounter any issues, please create an issue [here](https://github.com/DanielKurtjak/chai-deep-equal-ignore-undefined/issues).
+
+This plugin is licensed under the MIT License.
 
 ## Installation
 
@@ -32,25 +37,25 @@ yarn add chai-deep-equal-ignore-undefined --dev
 
 ```js
 const chai = require("chai");
-const chaiIgnoreUndefinedProperties = require("chai-deep-equal-ignore-undefined");
+const chaiDeepEqualIgnoreUndefined = require("chai-deep-equal-ignore-undefined");
 
-chai.use(chaiIgnoreUndefinedProperties);
+chai.use(chaiDeepEqualIgnoreUndefined);
 ```
 
 ### ES6 Import
 
 ```js
 import chai from "chai";
-import chaiIgnoreUndefinedProperties from "chai-deep-equal-ignore-undefined";
+import chaiDeepEqualIgnoreUndefined from "chai-deep-equal-ignore-undefined";
 
-chai.use(chaiIgnoreUndefinedProperties);
+chai.use(chaiDeepEqualIgnoreUndefined);
 ```
 
 ### TypeScript
 
 ```js
 import * as chai from "chai";
-import chaiIgnoreUndefinedProperties from "chai-deep-equal-ignore-undefined";
+import chaiDeepEqualIgnoreUndefined from "chai-deep-equal-ignore-undefined";
 
 chai.use(chaiIgnoreUndefinedProperties);
 
@@ -60,6 +65,8 @@ chai.use(chaiIgnoreUndefinedProperties);
 ## Examples
 
 All these examples are for JavaScript.
+
+#### Assertion examplees
 
 1. Ignore a top level property from an object
 
@@ -76,7 +83,7 @@ assert.deepEqualIgnoreUndefined(
 );
 ```
 
-2. Ignore properties within array with undefined values
+2. Ignore properties within an array with undefined values
 
 ```js
 const expectedArray = [{ aa: undefined, bb: "b" }];
@@ -87,7 +94,7 @@ expect(actualArray).to.deepEqualIgnoreUndefined(expectedArray);
 assert.deepEqualIgnoreUndefined(expectedArray, actualArray);
 ```
 
-3. Ignore a nested properties with undefined value (only for deep equal comparison)
+3. Ignore nested properties with undefined values
 
 ```js
 // Expect API
@@ -116,6 +123,29 @@ expectedObject.c = expectedObject;
 expect(actualObject).to.deepEqualIgnoreUndefined(expectedObject);
 // Assert API
 assert.deepEqualIgnoreUndefined(actualObject, expectedObject);
+```
+
+#### Deep clone function example
+
+```js
+import chai from "chai";
+import {
+  deepClone,
+  deepCloneIgnoreUndefined,
+} from "chai-deep-equal-ignore-undefined";
+
+const object = { a: { b: undefined, c: "c" }, d: undefined };
+object.f = object;
+const cloneWithoutUndefined = deepCloneIgnoreUndefined(object);
+const clone = deepClone(object);
+
+// Using regular `to.deep.equal` here to perform assertion.
+expect(cloneWithoutUndefined).to.deep.equal({ a: { c: "c" }, f: "[Circular]" });
+expect(clone).to.deep.equal({
+  a: { b: undefined, c: "c" },
+  d: undefined,
+  f: "[Circular]",
+});
 ```
 
 ## Contributing

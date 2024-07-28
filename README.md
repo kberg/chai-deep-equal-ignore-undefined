@@ -57,7 +57,7 @@ chai.use(chaiDeepEqualIgnoreUndefined);
 import * as chai from "chai";
 import chaiDeepEqualIgnoreUndefined from "chai-deep-equal-ignore-undefined";
 
-chai.use(chaiIgnoreUndefinedProperties);
+chai.use(chaiDeepEqualIgnoreUndefined);
 
 // The typings for chai-deep-equal-ignore-undefined are included with the package itself.
 ```
